@@ -19,8 +19,8 @@ function createSquare(number) {
 }
 
 for(let i = 1; i <= 256; i++) {
-    const square = createSquare(i);
-    container.appendChild(square);
+    const squares = createSquare(i);
+    container.appendChild(squares);
 } 
 
 
