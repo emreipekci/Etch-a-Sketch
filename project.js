@@ -30,8 +30,6 @@ function createGrid(numSquaresPerSide) {
     }
 };
 
-
-
 const button = document.querySelector("#button");
 button.addEventListener("click", () => {
     const numSquaresPerSide = parseInt(prompt("Enter the number of squares per side for the new grid"));
@@ -42,4 +40,28 @@ button.addEventListener("click", () => {
     }
 });
 
+//Randomize the squares' RGB values
+
+function generateRandomSquareColors(square) {
+
+    square.addEventListener("mouseenter", () => {
+
+        var color1 = Math.floor(Math.random() * 255) +1;
+        var color2 = Math.floor(Math.random() * 255) +1;
+        var color3 = Math.floor(Math.random() * 255) +1;
+        square.style.backgroundColor = "rgb(" + color1 + "," + color2 + "," + color3 + ")";
+        square.classList.add("randomized");
+    });
+    square.addEventListener("mouseleave", () => {
+        square.classList.remove("randomized");
+    });
+
+};
+
+const buttonSecond = document.querySelector(".randomized");
+buttonSecond.addEventListener("click", () => {
+    document.querySelectorAll(".square").forEach(square => {
+        generateRandomSquareColors(square);
+    });
+});
 
