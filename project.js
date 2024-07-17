@@ -3,26 +3,43 @@
 
 const container = document.querySelector("#container");
 
-function createSquare(number) {
-    const item = document.createElement("div");
-    item.className = "item";
-    item.textContent = number;
+function createSquare(sizeSquare) {
+    const square = document.createElement("div");
+    square.className = "square";
+    square.style.width = `${sizeSquare}px`;
+    square.style.height = `${sizeSquare}px`;
 
-    item.addEventListener("mouseenter", () => {
-        item.classList.add("hovered");
+    square.addEventListener("mouseenter", () => {
+        square.classList.add("hovered");
     });
-    item.addEventListener("mouseleave", () => {
-        item.classList.remove("hovered");
+    square.addEventListener("mouseleave", () => {
+        square.classList.remove("hovered");
     });
+    return square;
+};
 
-    return item;
-}
+function createGrid(numSquaresPerSide) {
+    container.innerHTML = "";
 
-for(let i = 1; i <= 256; i++) {
-    const squares = createSquare(i);
-    container.appendChild(squares);
-} 
+    const sizeContainer = 400;
+    const sizeSquare = sizeContainer/numSquaresPerSide;
+
+    for(let i = 1; i <= numSquaresPerSide ** 2; i++) {
+        const squares = createSquare(sizeSquare); 
+        container.appendChild(squares);
+    }
+};
 
 
+
+const button = document.querySelector("#button");
+button.addEventListener("click", () => {
+    const numSquaresPerSide = parseInt(prompt("Enter the number of squares per side for the new grid"));
+    if (!isNaN(numSquaresPerSide) && 0 < numSquaresPerSide <= 100) {
+        return createGrid(numSquaresPerSide);
+    } else {
+        alert("Please enter a valid number")
+    }
+});
 
 
