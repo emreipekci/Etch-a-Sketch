@@ -9,46 +9,50 @@ body {
 }
 
 .header {
-    background-color: #642726;
-    width: 1079px;
-    height: 94px;
+    background-color: #642726;  
+    width: 1080px;
+    height: 95px;
+    margin-top: 50px;
     margin-bottom: 20px;
+    
 }
   
-  .heading {
+.heading {
     font-family: "sans-serif", Arial;
     font-size: 70px;
-    color: #2c2c2b;
+    color: #ebe5be;
     text-align: center;
     margin: 0;
     line-height: 1;
     padding-top: 14px;
+    
 }
 
-  main {
+main {
     display: flex;
     flex-direction: column;
     justify-items: center;
     align-items: center;
-    background-color: #642726;
-    width: 1079px;
-    padding-bottom: 15px;
+    width: 1080px;
+    padding-bottom: 25px;
+    background-color: #585858;
+
 }
 
 #container {
     width: 600px;
     height: 600px;
-    max-width: 100%;
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid #2c2c2b;
+    background-color: rgb(136, 134, 131);
+    border: 1px solid #ebe5be;
 }
 
 .square {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border: 1px solid #2c2c2b;
+    border: 0.2px dotted #585858;
 }
 
 .hovered {
@@ -62,11 +66,12 @@ body {
 }
 
 #buttons button {
-    width: 120px;
-    height: 30px;
+    width: 130px;
+    height: 35px;
     margin: 5px;
     font-family: "Helvetica", Arial;
     font-size: 13px;
+    background-color: #ebe5be;
 }
 
 .footer {
@@ -74,8 +79,8 @@ body {
     align-content: center;
     margin-top: 20px;
     background-color: #642726;
-    width: 1079px;
-    height: 94px;
+    width: 1080px;
+    height: 95px;
     font-family: "Helvetica", Arial;
     font-size: 15px;
 }

@@ -2,6 +2,8 @@
 //create hovering effect
 
 const container = document.querySelector("#container");
+let previousEffect = null;
+
 createGrid(10);
 
 function createSquare(sizeSquare) {
@@ -45,93 +47,87 @@ buttonOne.addEventListener("click", () => {
 
 function generateRandomSquareColors(square) {
 
-    square.addEventListener("mouseenter", () => {
+    square.addEventListener("mouseenter", function randomColorEffect() {
 
         var color1 = Math.floor(Math.random() * 255) +1;
         var color2 = Math.floor(Math.random() * 255) +1;
         var color3 = Math.floor(Math.random() * 255) +1;
         square.style.backgroundColor = "rgb(" + color1 + "," + color2 + "," + color3 + ")";
-        square.classList.add("random-colors");
-    });
-    square.addEventListener("mouseleave", () => {
-        square.classList.remove("random-colors");
+        
     });
 
 };
 
 const buttonTwo = document.querySelector(".random-colors");
 buttonTwo.addEventListener("click", () => {
+    removePreviousEffect();
     document.querySelectorAll(".square").forEach(square => {
         generateRandomSquareColors(square);
     });
-
+    previousEffect = "random-colors"
 });
 
 //Create shading effect
 
 function generateShadingEffect(square) {
 
-    square.addEventListener("mouseenter", () => {
+    square.addEventListener("mouseenter", function shadingEffect() {
 
-        let opacity = parseFloat(window.getComputedStyle(square.target).opacity);
+        let opacity = parseFloat(window.getComputedStyle(square).opacity);
         if (opacity > 0) {
           opacity -= 0.1;
-        }
-        square.target.style.opacity = opacity;
-        square.classList.add("shading");
-    });
-    square.addEventListener("mouseleave", () => {
-        square.classList.remove("shading");
-        square.target.style.opacity = 1;
-    }); 
-}
-
-
-
-
-/*
-function generateShadingEffect(square) {
-    let darkeningInterval;
-    
-    square.addEventListener("mouseenter", () => {
-
-        let opacity = 0;
-        square.classList.add("shading");
-
-        if (darkeningInterval) {
-            clearInterval(darkeningInterval);
-        }
-
-        darkeningInterval = setInterval(() => {
-            if (opacity < 1) {
-                opacity += 0.1;
-                square.style.opacity = opacity.toFixed(1);
-            } else {
-                clearInterval(darkeningInterval);
-            }
-        }, 10); // Adjust the interval time as needed for smoother effect
+        };
+        square.style.opacity = opacity;    
     });
 
-    square.addEventListener("mouseleave", () => {
-        if (darkeningInterval) {
-            clearInterval(darkeningInterval);
-            square.classList.remove("shading");
-        }
-        square.style.opacity = 1; // Reset the opacity to full when the mouse leaves
-    });
+};
 
-}
-*/
 const buttonThree = document.querySelector(".shading");
 buttonThree.addEventListener("click", () => {
+    removePreviousEffect();
     document.querySelectorAll(".square").forEach(square => {
         generateShadingEffect(square);
     });
+    previousEffect = "shading";
 });
+
+
+//Create erasing
+
+function eraseEffects(square) {
+    square.addEventListener("mouseenter", function erasingEffect() {
+        square.style.backgroundColor = "";
+        square.style.opacity = 1;
+    })
+};
 
 const buttonFour = document.querySelector(".erase");
 buttonFour.addEventListener("click", () => {
+    removePreviousEffect();
     document.querySelectorAll(".square").forEach(square => {
-    square.style.backgroundColor = "";
+        eraseEffects(square);
+    });
+    previousEffect = "erase";
+});
+
+//Clear the sketchpad
+
+const buttonFive = document.querySelector(".clear");
+buttonFive.addEventListener("click", () => {
+    document.querySelectorAll(".square").forEach(square => {
+        square.style.backgroundColor = "";
     });
 });
+
+//only one effect could be active
+
+function removePreviousEffect() {
+    if (previousEffect) {
+        document.querySelectorAll(".square").forEach(square => {
+            const newSquare = square.cloneNode(true);
+            square.parentNode.replaceChild(newSquare, square);
+        });
+    };
+};
+
+
