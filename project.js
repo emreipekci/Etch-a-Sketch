@@ -116,6 +116,7 @@ const buttonFive = document.querySelector(".clear");
 buttonFive.addEventListener("click", () => {
     document.querySelectorAll(".square").forEach(square => {
         square.style.backgroundColor = "";
+        square.style.opacity = 1;
     });
 });
 
